@@ -37,7 +37,7 @@ public class LocationActivity extends Activity
     private Address addressC;
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;/*     * Define a request code to send to Google Play services     * This code is returned in Activity.onActivityResult     */
     private LocationManager locationManager;
-
+    String titleTask="";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,6 +46,7 @@ public class LocationActivity extends Activity
         searchButton = (Button) this.findViewById(R.id.search_location_button);
         locationText = (EditText) this.findViewById(R.id.location_text);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);// Gets the Location manager
+        titleTask = getIntent().getStringExtra(CreateTaskActivity.EXTRA_MESSAGE);
         searchButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -56,19 +57,15 @@ public class LocationActivity extends Activity
 
                 try
                 {
-//                    List<Address> address = gc.getFromLocationName(locationText.getText().toString(), 1); // Getting the LatLng from the address field
-                    List<Address> address = gc.getFromLocationName("יהודה הלוי 5 חולון", 1); // Getting the LatLng from the address field
-                    Toast.makeText(getApplicationContext(), "Location co." + address.get(0).getLatitude(), Toast.LENGTH_LONG).show();
-//
-//                    addressC = address.get(0);
-//                    intent.putExtra("Lat", address.get(0).getLatitude()); // Adding the latitude to the IntentResult
-//                    intent.putExtra("Lng", address.get(0).getLongitude()); // Adding the longitude to the IntentResult
-//                    intent.putExtra("location", locationText.getText().toString()); // Adding the address string to the IntentResult
-//
-//                    setResult(Activity.RESULT_OK, intent); // Setting the results for the calling activity
+                    List<Address> address = gc.getFromLocationName(locationText.getText().toString(), 1); // Getting the LatLng from the address field
+//                    List<Address> address = gc.getFromLocationName("יהודה הלוי 5 חולון", 1); // Getting the LatLng from the address field
+      //             Toast.makeText(getApplicationContext(), "Location co." + address.get(0).getLatitude(), Toast.LENGTH_LONG).show();
 
-//                    createNotification(v);
+                    addressC = address.get(0);
+                    createNotification(v);
 
+                    Toast.makeText(getApplicationContext(), "Location was successfully retrieved to "+addressC.getThoroughfare(), Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplication(), TaskListActivity.class));
                 }
                 catch ( IOException e )
                 {
@@ -82,23 +79,14 @@ public class LocationActivity extends Activity
 
     public void createNotification(View view)
     {
-//        Context context = getApplicationContext();
-//        Intent intentSent = new Intent(this, MyBroadcastReceiver.class);
+        Context context = getApplicationContext();
+        Intent intentSent = new Intent(this, MyBroadcastReceiver.class);
 //        Toast.makeText(getApplicationContext(), "Location was successfully retrieved", Toast.LENGTH_LONG).show();
-//
-//        intentSent.putExtra(EXTRA_MESSAGE, "ss");
-//        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(context, 0, intentSent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_UPDATE_CURRENT);//
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        //alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + expireTime, pendingIntent2);
-//
-//        addressC.getLatitude();
-//        locationManager.addProximityAlert(addressC.getLatitude(), addressC.getLongitude(), 500, -1, pendingIntent2);
+        intentSent.putExtra(EXTRA_MESSAGE, titleTask);
+        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(context, 0, intentSent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_UPDATE_CURRENT);//
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        locationManager.addProximityAlert(addressC.getLatitude(), addressC.getLongitude(), 50, -1, pendingIntent2);
 
-//        String result_text=topicText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, result_text);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT);
-//        addressC.getLatitude();
-//        locationManager.addProximityAlert(addressC.getLatitude(), addressC.getLongitude(),500,-1,pendingIntent );
 
     }
 
@@ -120,3 +108,14 @@ public class LocationActivity extends Activity
     }
 
 }
+//                    intent.putExtra("Lat", address.get(0).getLatitude()); // Adding the latitude to the IntentResult
+//                    intent.putExtra("Lng", address.get(0).getLongitude()); // Adding the longitude to the IntentResult
+//                    intent.putExtra("location", locationText.getText().toString()); // Adding the address string to the IntentResult
+//
+//                    setResult(Activity.RESULT_OK, intent); // Setting the results for the calling activity
+
+//        String result_text=topicText.getText().toString();
+//        intent.putExtra(EXTRA_MESSAGE, result_text);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT);
+//        addressC.getLatitude();
+//        locationManager.addProximityAlert(addressC.getLatitude(), addressC.getLongitude(),500,-1,pendingIntent );

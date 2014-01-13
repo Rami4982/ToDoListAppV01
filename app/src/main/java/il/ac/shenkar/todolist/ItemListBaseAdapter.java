@@ -66,7 +66,7 @@ public class ItemListBaseAdapter extends BaseAdapter
             ItemDetails itemDetailsC = connectorDB.getElm((Integer) view.getTag());
             itemDetailsC.setStatus();
             connectorDB.editElm(itemDetailsC);
-            Toast.makeText( context," is  " +(Integer) view.getTag(),10 ).show();
+          //  Toast.makeText( context," is  " +(Integer) view.getTag(),10 ).show();
 
         }
     };

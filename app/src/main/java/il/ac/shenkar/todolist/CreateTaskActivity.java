@@ -1,3 +1,4 @@
+
 package il.ac.shenkar.todolist;
 
 import android.app.Activity;
@@ -49,7 +50,10 @@ public class CreateTaskActivity extends Activity
             public void onClick(View v)
             {
                 populateIt(v);
-                  startActivity(new Intent(getApplicationContext(), LocationActivity.class));
+
+                Intent intentSent = new Intent(getApplicationContext(), LocationActivity.class);
+                intentSent.putExtra(EXTRA_MESSAGE, titleTask);
+                  startActivity(intentSent);
             }
         });
         Button createBtn = (Button) findViewById(R.id.create_Btn);

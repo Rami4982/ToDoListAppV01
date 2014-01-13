@@ -20,7 +20,7 @@ public class ItemDetails
     {
         this.id = 0;
         this.title = "";
-        this.status = true;
+        this.status = false;
         this.description = "";
         creationDate = new Time();
         creationDate.setToNow();
@@ -33,7 +33,7 @@ public class ItemDetails
     {
         this.id = id;
         this.title = title;
-        this.status = true;
+        this.status = false;
         this.description = description;
         this.creationDate = new Time();
         this.creationDate.setToNow();
