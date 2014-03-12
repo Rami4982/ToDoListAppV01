@@ -1,0 +1,24 @@
+<!-- From: file:/C:/Users/MMTZ/AndroidStudioProjects/ToDoList/app/src/main_menu/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="il.ac.shenkar.todolist">
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:name="startUp.ToDoListApplication" android:theme="@style/AppTheme">
+        <activity android:label="@string/app_name" android:name=".controllers.taskList.TaskListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/title_activity_create_task" android:name=".controllers.createTask.CreateTaskActivity">
+        </activity>
+        <activity android:label="@string/title_activity_location" android:name=".controllers.location.LocationActivity"/>
+        <receiver android:name="il.ac.shenkar.todolist.MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.shenkar.todolist"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

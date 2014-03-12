@@ -1,0 +1,19 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+      xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".controllers.taskList.TaskListActivity">
+
+    <item android:id="@+id/newToDoButton"
+          android:title="@string/AddButton"
+          android:icon="@drawable/new_to_do"
+          android:onClick="onNewToDoClick"
+          android:showAsAction="always"
+          app:showAsAction="always" />
+    <item android:id="@+id/settingsButton"
+        android:title="@string/settingsButton"
+        android:icon="@drawable/setting_small"
+        android:onClick="onDeleteAll"
+        android:showAsAction="always"
+        app:showAsAction="always"
+        />
+</menu>

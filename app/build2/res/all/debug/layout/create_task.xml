@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <EditText android:id="@+id/edit_message" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/edit_message"/>
+    <EditText android:id="@+id/inputDescription" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/inputDescription"/>
+
+    <DatePicker android:id="@+id/datePicker" android:layout_gravity="center_horizontal" android:layout_height="199dp" android:layout_width="wrap_content" />
+
+    <TimePicker android:layout_width="match_parent" android:layout_height="100dp" android:id="@+id/timePicker" android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:baselineAligned="true">
+
+        <Button android:id="@+id/create_Btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/create_Btn" android:layout_weight="1"/>
+        <Button android:id="@+id/loc_Btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/loc_Btn"/>
+        <Button android:id="@+id/close_Btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/close_Btn"/>
+
+    </LinearLayout>
+</LinearLayout>
+<!-- From: file:/C:/Users/MMTZ/AndroidStudioProjects/ToDoList/app/src/main_menu/res/layout/create_task.xml -->

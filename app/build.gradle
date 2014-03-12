@@ -1,0 +1,28 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion '19.0.1'
+
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'org.roboguice:roboguice:2.0'
+    compile group: 'com.google.guava', name: 'guava', version: '15.0'
+    compile 'com.google.apis:google-api-services-analytics:v3-rev81-1.17.0-rc'
+    compile 'com.google.android.gms:play-services:4.0.30'
+    compile files('build/libs/libGoogleAnalyticsServices.jar')
+}

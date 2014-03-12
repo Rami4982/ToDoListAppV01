@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:layout_below="@+id/add_Btn">
+
+    <TextView
+        android:id="@+id/Name"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:textColor="#FFF"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.27"
+        />
+
+    <CheckBox
+        android:id="@+id/isImportantCheckBox"
+        android:layout_width="@dimen/abc_action_button_min_width"
+        android:layout_height="@dimen/abc_action_button_min_width"
+        android:background="@android:color/transparent"
+        android:button="@drawable/flag_checkbox"
+        />
+
+    <ImageButton
+        android:id="@+id/Confirm"
+        android:layout_width="@dimen/abc_action_button_min_width"
+        android:layout_height="@dimen/abc_action_button_min_width"
+        android:src="@drawable/confirm"
+        android:textColorHint="#000002"
+        android:contentDescription="@string/confirm"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        />
+
+</LinearLayout>
