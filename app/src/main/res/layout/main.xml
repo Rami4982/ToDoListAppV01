@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:background="#000"
-              android:baselineAligned="true">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:background="@drawable/notepa10"
+              android:baselineAligned="true"
+              android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="What do you wanna do today ?"
+        android:textSize="22dip"
+        android:id="@+id/textView"
+        android:layout_weight="0.83"
+        android:textStyle="italic"
+        android:typeface="sans"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="9dip"
+        android:layout_marginLeft="10dip"/>
 
     <ListView
-        android:layout_height="wrap_content"
+        android:layout_height="408dp"
         android:layout_width="fill_parent"
         android:id="@+id/taskList_main"
-        android:headerDividersEnabled="true">
+        android:headerDividersEnabled="true"
+        android:layout_marginTop="15dip">
 
     </ListView>
 

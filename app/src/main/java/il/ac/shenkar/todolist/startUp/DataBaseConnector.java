@@ -6,12 +6,19 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.format.Time;
 import android.widget.Toast;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Ordering;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 import il.ac.shenkar.todolist.ItemDetails;
 
@@ -138,12 +145,35 @@ public class DataBaseConnector extends SQLiteOpenHelper
 
     public List<ItemDetails> getItems()
     {
-        return itemsDetails;
+        Ordering<ItemDetails> ordering = Ordering.from(new Comparator<ItemDetails>()
+        {
+            @Override
+            public int compare(ItemDetails itemDetails, ItemDetails itemDetails2)
+            {
+                return Time.compare(itemDetails.getCreationDate(), itemDetails2.getCreationDate());
+            }
+        });
+
+        return ordering.sortedCopy(itemsDetails);
     }
 
     public Optional<ItemDetails> getElm(int position)
     {
         return Optional.of(itemsDetails.get(position));
+    }
+
+    public Optional<ItemDetails> getElmById(final int position)
+    {
+        ItemDetails itemDetails = Iterables.find(itemsDetails, new Predicate<ItemDetails>()
+        {
+            @Override
+            public boolean apply(@Nullable ItemDetails input)
+            {
+                return input.getId() == position;
+            }
+        });
+
+        return Optional.fromNullable(itemDetails);
     }
 
     public void deleteElm(int position)
@@ -155,6 +185,15 @@ public class DataBaseConnector extends SQLiteOpenHelper
 
         sqLiteDatabase.close();
 
+    }
+
+    public void deleteElmId(int position)
+    {
+        try
+        {
+            deleteElm(itemsDetails.indexOf(getElmById(position).get()));
+        }
+        catch (Exception e){}
     }
 
     public void deleteAll()

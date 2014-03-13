@@ -3,7 +3,12 @@ package il.ac.shenkar.todolist.controllers.taskList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -58,19 +63,12 @@ class ItemListBaseAdapter extends BaseAdapter implements Serializable
         @Override
         public void onClick(View view)
         {
+            View parent = (View) view.getParent();
 
-            ItemDetails itemDetailsC = connectorDB.getElm((Integer) view.getTag()).get();
-            itemDetailsC.setStatus();
-            connectorDB.updateItemDetails(itemDetailsC);
-
-            context.runOnUiThread(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    notifyDataSetChanged();
-                }
-            });
+            //noinspection ConstantConditions
+            parent.setTag(R.integer.bla, true);
+            //noinspection ConstantConditions
+            parent.setAlpha(0.5f);
         }
     };
 
@@ -88,17 +86,32 @@ class ItemListBaseAdapter extends BaseAdapter implements Serializable
 
             holder.Title = (TextView) convertView.findViewById(R.id.Name);
             holder.Title.setOnClickListener(editButtonOnClickListener);
+
             holder.Confirm = (ImageButton) convertView.findViewById(R.id.Confirm);
             holder.Confirm.setOnClickListener(doneButtonOnClickListener);
-            holder.Title.setOnTouchListener(new OnSwipeTouchListener(context)
+
+            /*holder.Title.setOnTouchListener(new OnSwipeTouchListener(context)
             {
                 @Override
                 public void onSwipeLeft()
                 {
                     doneButtonOnClickListener.onClick(getViewMutableOptionalSupplier().get());
                 }
-            });
 
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent)
+                {
+                    boolean b = super.onTouch(view, motionEvent);
+
+                    Intent intent = new Intent(context, CreateTaskActivity.class);
+                    intent.putExtra("urlIndex", (Integer) view.getTag());
+                    context.startActivity(intent);
+
+                    return b;
+                }
+            });*/
+            convertView.setTag(R.integer.bla, false);
+            convertView.setTag(R.integer.id, itemDetails.getId());
             convertView.setTag(holder);
         }
         else

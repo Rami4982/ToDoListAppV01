@@ -1,14 +1,18 @@
 package il.ac.shenkar.todolist.controllers.taskList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import javax.inject.Inject;
 
+import il.ac.shenkar.todolist.ItemDetails;
 import il.ac.shenkar.todolist.R;
 import il.ac.shenkar.todolist.controllers.createTask.CreateTaskActivity;
 import il.ac.shenkar.todolist.controllers.utils.ActivityOpenerFactory;
@@ -72,8 +76,46 @@ public class TaskListActivity extends RoboAnalyticActivity
 
     public void onDeleteAll(MenuItem item)
     {
-        dataBaseConnector.deleteAll();
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Delete all?");
+        alert.setMessage("Are you sure you want to delete all finished tasks ?");
 
-        updateData();
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                try
+                {
+                    for (int x = 0; x < listView.getChildCount(); x++)
+                    {
+                        View childAt = listView.getChildAt(x);
+                        //noinspection ConstantConditions
+                        if (childAt != null && (Boolean)childAt.getTag(R.integer.bla))
+                        {
+                            //noinspection ConstantConditions
+                            Integer id = (Integer) childAt.getTag(R.integer.id);
+                            ItemDetails itemDetailsC = dataBaseConnector.getElmById(id).get();
+                            itemDetailsC.setStatus();
+                            dataBaseConnector.updateItemDetails(itemDetailsC);
+
+                            dataBaseConnector.deleteElmId(id);
+                        }
+                    }
+                    updateData();
+                    dialog.dismiss();
+                }
+                catch (Exception e){}
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
     }
 }

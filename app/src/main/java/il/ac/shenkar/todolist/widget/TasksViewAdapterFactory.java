@@ -20,7 +20,7 @@ public class TasksViewAdapterFactory implements RemoteViewsService.RemoteViewsFa
     private final Context applicationContext;
     private final Intent intent;
     private final DataBaseConnector dataBaseConnector;
-    private final List<ItemDetails> itemDetailsList;
+    private List<ItemDetails> itemDetailsList;
 
     public TasksViewAdapterFactory(Context applicationContext, Intent intent)
     {
@@ -38,6 +38,7 @@ public class TasksViewAdapterFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onDataSetChanged()
     {
+        itemDetailsList = dataBaseConnector.getItems();
     }
 
     @Override
@@ -68,7 +69,7 @@ public class TasksViewAdapterFactory implements RemoteViewsService.RemoteViewsFa
     {
         Time notificationDate = itemDetails.getNotificationDate();
 
-        return notificationDate.format("%Y:%m:%d %H:%M:%S");
+        return notificationDate.format("%H:%M:%S");
     }
 
     @Override
