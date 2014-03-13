@@ -66,7 +66,7 @@ class ItemListBaseAdapter extends BaseAdapter implements Serializable
             View parent = (View) view.getParent();
 
             Boolean g = (Boolean)parent.getTag(R.integer.bla);
-            if (g)
+            if (!g)
             {
                 parent.setAlpha(0.5f);
             }
