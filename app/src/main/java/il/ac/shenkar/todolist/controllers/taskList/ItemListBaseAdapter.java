@@ -65,10 +65,18 @@ class ItemListBaseAdapter extends BaseAdapter implements Serializable
         {
             View parent = (View) view.getParent();
 
+            Boolean g = (Boolean)parent.getTag(R.integer.bla);
+            if (g)
+            {
+                parent.setAlpha(0.5f);
+            }
+            else
+            {
+                parent.setAlpha(1f);
+            }
+
             //noinspection ConstantConditions
-            parent.setTag(R.integer.bla, true);
-            //noinspection ConstantConditions
-            parent.setAlpha(0.5f);
+            parent.setTag(R.integer.bla, !g);
         }
     };
 
